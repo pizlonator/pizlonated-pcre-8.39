@@ -3567,7 +3567,7 @@ while (!done)
       yield = 1;
       goto EXIT;
       }
-    if (fread_znullify(re, 1, true_size, f) != true_size) goto FAIL_READ;
+    if (fread(re, 1, true_size, f) != true_size) goto FAIL_READ;
 
     magic = REAL_PCRE_MAGIC(re);
     if (magic != MAGIC_NUMBER)
@@ -4430,7 +4430,7 @@ while (!done)
         sbuf[7] = (pcre_uint8)((true_study_size) & 255);
 
         if (fwrite(sbuf, 1, 8, f) < 8 ||
-            fwrite_znullify(re, 1, true_size, f) < true_size)
+            fwrite(re, 1, true_size, f) < true_size)
           {
           fprintf(outfile, "Write error on %s: %s\n", to_file, strerror(errno));
           }
